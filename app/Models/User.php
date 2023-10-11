@@ -136,4 +136,13 @@ class User extends Authenticatable
         return Micropost::whereIn('user_id', $userIds);
     }
     
+    public function favPosts()
+    {
+        return $this->belongsToMany(Micropost::class, 'favorites', 'user_id', 'fav_post_id')->withTimestamps();
+    }
+    
+    public function loadFavoritesCounts(){
+        $this->loadCount('favPosts');
+    }
+    
 }
