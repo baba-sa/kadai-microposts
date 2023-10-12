@@ -84,10 +84,15 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
         
         // 関係するモデルの件数をロード
-        $user->loadFavoritesCounts();
+        $user->loadRelationshipCounts();
         
         // ユーザのフォロワー一覧を取得
         $favorites = $user->favPosts()->paginate(10);
+        
+        return view('users.fav_posts', [
+            'posts' => $favorites,
+            'user' => $user,
+            ]);
         
     }
 

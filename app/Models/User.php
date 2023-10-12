@@ -56,6 +56,9 @@ class User extends Authenticatable
     public function loadRelationshipCounts()
     {
         $this->loadCount('microposts');
+        $this->loadcount('followings');
+        $this->loadcount('followers');
+        $this->loadcount('favPosts');
     }
     
     /**
@@ -141,8 +144,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Micropost::class, 'favorites', 'user_id', 'fav_post_id')->withTimestamps();
     }
     
-    public function loadFavoritesCounts(){
-        $this->loadCount('favPosts');
+    public function is_favor($micropostId)
+    {
+        return $this->favPosts()->where('fav_post_id', $micropostId)->exists();
     }
-    
 }

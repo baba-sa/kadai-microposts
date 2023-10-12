@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UserFollowController extends Controller
+class FavoritesController extends Controller
 {
     /**
-     * postをfavするアクション。
+     * ユーザをフォローするアクション。
      *
-     * @param  $post_id  postのid
+     * @param  $post_id  相手ユーザのid
      * @return \Illuminate\Http\Response
      */
     public function store($post_id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザをフォローする
-        \Auth::user()->favorite($id);
+        \Auth::user()->favPosts()->attach($post_id);
         // 前のURLへリダイレクトさせる
         return back();
     }
@@ -23,13 +23,13 @@ class UserFollowController extends Controller
     /**
      * ユーザをアンフォローするアクション。
      *
-     * @param  $post_id  postのid
+     * @param  $post_id  相手ユーザのid
      * @return \Illuminate\Http\Response
      */
     public function destroy($post_id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
-        \Auth::user()->unfavotire($post_id);
+        \Auth::user()->favPosts()->detach($post_id);
         // 前のURLへリダイレクトさせる
         return back();
     }
@@ -37,8 +37,8 @@ class UserFollowController extends Controller
     /**
      * このユーザに関係するモデルの件数をロードする。
      */
-    public function loadFavoritesCounts()
+    public function loadRelationshipCounts()
     {
-        $this->loadCount(['microposts', 'favorite']);
+        $this->loadCount(['microposts', 'followings', 'followers']);
     }
 }

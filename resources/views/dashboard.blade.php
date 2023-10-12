@@ -2,18 +2,18 @@
 
 @section('content')
     @if (Auth::check())
-        <div class="sm:grid sm:grid-cols-3 sm:gap-10">
-            <aside class="mt-4">
-                {{-- ユーザ情報 --}}
-                @include('users.card')
-            </aside>
-            <div class="sm:col-span-2">
-                {{-- 投稿フォーム --}}
-                @include('microposts.form')
-                {{-- 投稿一覧 --}}
-                @include('microposts.microposts')
-            </div>
+    <div class="sm:grid sm:grid-cols-3 sm:gap-10">
+        <aside class="mt-4">
+            {{-- ユーザ情報 --}}
+            @include('users.card')
+        </aside>
+    
+        <div class="sm:col-span-2 mt-4">
+            {{-- 投稿フォーム --}}
+            @include('microposts.form')
+            @include('microposts.microposts')
         </div>
+    </div>
     @else
         <div class="prose hero bg-base-200 mx-auto max-w-full rounded">
             <div class="hero-content text-center my-10">

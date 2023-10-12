@@ -1,17 +1,14 @@
-@if (Auth::id() != $post->id)
-    @if (Auth::user()->is_favor($post->id))
-        {{-- アンフォローボタンのフォーム --}}
-        <form method="POST" action="{{ route('user.unfavorite', $post->id) }}">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-error btn-block normal-case" 
-                onclick="return confirm('id = {{ $user->id }} のフォローを外します。よろしいですか？')">Unfav</button>
-        </form>
-    @else
-        {{-- フォローボタンのフォーム --}}
-        <form method="POST" action="{{ route('user.favorites', $post->id) }}">
-            @csrf
-            <button type="submit" class="btn btn-primary btn-block normal-case">Fav</button>
-        </form>
-    @endif
+@if (Auth::user()->is_favor($micropost->id))
+    {{-- unfavボタンのフォーム --}}
+    <form method="POST" action="{{ route('favorites.unfavorite', $micropost->id) }}">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-outline btn-error btn-sm normal-case">Unfav</button>
+    </form>
+@else
+    {{-- favボタンのフォーム --}}
+    <form method="POST" action="{{ route('favorites.favorite', $micropost->id) }}">
+        @csrf
+        <button type="submit" class="btn btn-accent btn-sm normal-case">Fav</button>
+    </form>
 @endif

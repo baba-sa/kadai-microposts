@@ -2,19 +2,16 @@
 
 @section('content')
     <div class="sm:grid sm:grid-cols-3 sm:gap-10">
+        
         <aside class="mt-4">
             {{-- ユーザ情報 --}}
             @include('users.card')
         </aside>
         <div class="sm:col-span-2 mt-4">
-            {{-- タブ --}}  
+            {{-- タブ --}}
             @include('users.navtabs')
-            {{-- 投稿フォーム --}}
-            @include('microposts.form')
-            {{-- 投稿一覧 --}}
-            @include('microposts.microposts',[
-            'microposts'=>$user->microposts()->orderBy('created_at', 'desc')->paginate(10),
-            ])
+            {{--posts--}}
+            @include('microposts.microposts',['microposts'=>$posts])
         </div>
     </div>
 @endsection

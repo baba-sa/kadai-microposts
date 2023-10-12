@@ -16,9 +16,9 @@
     </a>
     
     {{--お気に入り一覧--}}
-    <a href="{{ route('users.fav_posts', $user->id) }}" class="tab tab-lifted grow {{ Request::routeIs('users.favPosts') ? 'tab-active' : '' }}">
+    <a href="{{ route('users.fav_posts', $user->id) }}" class="tab tab-lifted grow {{ Request::routeIs('users.fav_posts') ? 'tab-active' : '' }}">
         Favorites
-        <div class="badge ml-1">{{ $user->followers_count }}</div>
+        <div class="badge ml-1">{{ $user->fav_posts_count }}</div>
     </a>
 
 </div>
